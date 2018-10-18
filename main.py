@@ -12,7 +12,7 @@ LOCAL_FILE = 'read.txt'
 
 #retrieves URL and saves it to local file
 local_file, headers = urlretrieve(URL_PATH, LOCAL_FILE, lambda x,y,z:
-print('.', end=", flush=True))   
+print('.', end='', flush=True))   
 
 #dictionary of requests and number of times requested
 requests = {}
