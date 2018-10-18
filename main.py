@@ -73,7 +73,7 @@ print("Percentage of redirected requests:","{0:.2}%".format((redirectedRequests)
 print("Least requested:", requests[0])
 print("Most requested:", requests[-1])
 
-# List all the days of the week
+#Lists all the days of the week
 print("\nRequests By Day of the Week")
 days = [0 for x in range(7)]
 for x in dates.keys():
@@ -81,26 +81,26 @@ for x in dates.keys():
 
 DAYSOFTHEWEEK = ["Monday", "Tuesday", "Wendesday","Thursday","Friday", "Saturday", "Sunday"]
 
-# Print out the days of the week, 
+#Prints out the days of the week, 
 for i,x in enumerate(DAYSOFTHEWEEK):
 	print(x, ":", days[i])
      
- #list to keep track of the weeks
+ #lists to keep track of the weeks
 weeks = [0 for x in range(52)]
 
-#list to keep track of the months
+#lists to keep track of the months
 months = [0 for x in range(13)]
 datesInMonhs = [[] for x in range(13)]
 
-#loop through the dates and add up all the similar months requests
+#loops through the dates and add up all the similar months requests
 for x in dates.keys():
 	months[x.month] += dates[x]
 	datesInMonhs[x.month].append
 
-# Array displaying the months, starting at 1-index.
+#Array displaying the months, starting at 1-index.
 MONTHNAMES = ["","January","February","March","April","May","June","July","August","September","October","November","December"]
 
-# list all the requests by month, skipping 0th index
+#lists all the requests by month, skipping 0th index
 print("\nRequests By Month of the year")
 for i,x in enumerate(MONTHNAMES):
 	if i == 0:
@@ -108,12 +108,39 @@ for i,x in enumerate(MONTHNAMES):
 	print(x, ":", months[i])
 
 
-# Write the week of each date to the weeks list
+#Writes the week of each date to the weeks list
 for x in dates.keys():
 	weeks[x.timetuple()[7] % 52] += dates[x]
 
 
-#loop through the dates and add up all the similar weekly requests
+#loops through the dates and adds up all the similar weekly requests
 print("\n Requests by week of year")
 for i,x in enumerate(weeks):
 	print(i+1,":", weeks[i])
+
+      
+print("Writing requests to a text file of each month...", end="")
+#Parses files of the requests into each month
+for line in open(LOCAL_FILE).readlines(): # files are iterable
+	record = line.split(" ")
+	try:
+		date = record[3]
+		dateFormat = date[1:date.find(":")]
+		dt = parser.parse(dateFormat)
+		datesInMonhs[dt.month].append(line)
+	except IndexError:
+		pass
+	# Catches an invalid date format
+	except ValueError:
+		pass
+
+
+# Makes the files of each request per the month requested
+for i,x in enumerate(datesInMonhs):
+	if i ==0:
+		continue
+	file = open(MONTHNAMES[i]+".txt","w") 
+	for item in x:
+		file.write(item + "\n")
+	file.close()
+	print(".", end="")
