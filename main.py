@@ -10,11 +10,16 @@ successRequests = 0
 errorRequests = 0
 redirectedRequests = 0
 
+#initialize array of 12 month to store requests of each month
 months = [[] for x in range(12)]
 
-for x in file.readlines():
+#loops through each line of file
+for x in open(LOCAL_FILE).readlines():
+	#splits the record by space to parse
 	record = x.split()
-	print(record, end="")
+	#print(record)
+	
+	#parses requests and sees what kind of request code it has and how many made
 	try:
 		request = record[6]
 		htmlCode = record[8]
@@ -29,5 +34,6 @@ for x in file.readlines():
 		else:
 			requests[request] = 1
 		totalRequests += 1
+	#skips requests if it is malformed
 	except IndexError:
 		pass
