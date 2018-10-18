@@ -29,17 +29,26 @@ redirectedRequests = 0
 months = [[] for x in range(12)]
 
 #loops through each line of file
-for x in open(LOCAL_FILE).readlines():
+for line in open(LOCAL_FILE).readlines():
 	#splits the record by space to parse
-	record = x.split()
-	#print(record)
+	record = line.split(" ")
+	print(record)
 	
 	#parses requests and sees what kind of request code it has and how many made
 	try:
 		request = record[6]
 		htmlCode = record[8]
+		date = record[3]
+		dateFormat = date[1:date.find(":")]
+		dt = parser.parse(dateFormat)
+		if dt in dates.keys():
+			dates[dt] += 1
+		else:
+			dates[dt] = 1
+		#if the code has on error (4xx)
 		if htmlCode[0] == "4":
 			errorRequests += 1
+		# if the code is redirect (3xx)
 		elif htmlCode[1] == "3":
 			redirectedRequests += 1
 		else:
@@ -48,8 +57,9 @@ for x in open(LOCAL_FILE).readlines():
 			requests[request] += 1
 		else:
 			requests[request] = 1
+
 		totalRequests += 1
-	#skips requests if it is malformed
+	#catches any invalid requets
 	except IndexError:
 		pass
 
