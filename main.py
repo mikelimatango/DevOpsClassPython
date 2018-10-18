@@ -1,6 +1,7 @@
 
 import operator
 
+#opens the file
 file = open("read.txt")
 
 requests = {}
