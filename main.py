@@ -64,12 +64,23 @@ for line in open(LOCAL_FILE).readlines():
 		pass
 
 print("\nREQUEST COUNTS:")
-#sorts the dictionary, sorts the request by number of times requested
+# Sort the dates dictionary in ordef of the request counts
 requests = sorted(requests.items(), key=operator.itemgetter(1))
 
-#prints answers to questions
-print("Total Requests:",totalRequests)
+print("totalRequests:",totalRequests)
 print("Percentage of unsuccessful requests:","{0:.2}%".format((errorRequests)/(errorRequests + redirectedRequests + successRequests)*100))
 print("Percentage of redirected requests:","{0:.2}%".format((redirectedRequests)/(errorRequests + redirectedRequests + successRequests)*100))
 print("Least requested:", requests[0])
 print("Most requested:", requests[-1])
+
+# List all the days of the week
+print("\nRequests By Day of the Week")
+days = [0 for x in range(7)]
+for x in dates.keys():
+	days[x.weekday()] += dates[x]
+
+DAYSOFTHEWEEK = ["Monday", "Tuesday", "Wendesday","Thursday","Friday", "Saturday", "Sunday"]
+
+# Print out the days of the week, 
+for i,x in enumerate(DAYSOFTHEWEEK):
+	print(x, ":", days[i])
