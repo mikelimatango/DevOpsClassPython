@@ -84,3 +84,36 @@ DAYSOFTHEWEEK = ["Monday", "Tuesday", "Wendesday","Thursday","Friday", "Saturday
 # Print out the days of the week, 
 for i,x in enumerate(DAYSOFTHEWEEK):
 	print(x, ":", days[i])
+     
+ #list to keep track of the weeks
+weeks = [0 for x in range(52)]
+
+#list to keep track of the months
+months = [0 for x in range(13)]
+datesInMonhs = [[] for x in range(13)]
+
+#loop through the dates and add up all the similar months requests
+for x in dates.keys():
+	months[x.month] += dates[x]
+	datesInMonhs[x.month].append
+
+# Array displaying the months, starting at 1-index.
+MONTHNAMES = ["","January","February","March","April","May","June","July","August","September","October","November","December"]
+
+# list all the requests by month, skipping 0th index
+print("\nRequests By Month of the year")
+for i,x in enumerate(MONTHNAMES):
+	if i == 0:
+		continue
+	print(x, ":", months[i])
+
+
+# Write the week of each date to the weeks list
+for x in dates.keys():
+	weeks[x.timetuple()[7] % 52] += dates[x]
+
+
+#loop through the dates and add up all the similar weekly requests
+print("\n Requests by week of year")
+for i,x in enumerate(weeks):
+	print(i+1,":", weeks[i])
