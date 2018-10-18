@@ -74,7 +74,9 @@ print("Least requested:", requests[0])
 print("Most requested:", requests[-1])
 
 #Lists all the days of the week
+print("\n........................")
 print("\nRequests By Day of the Week")
+print("\n........................")
 days = [0 for x in range(7)]
 for x in dates.keys():
 	days[x.weekday()] += dates[x]
@@ -101,7 +103,9 @@ for x in dates.keys():
 MONTHNAMES = ["","January","February","March","April","May","June","July","August","September","October","November","December"]
 
 #lists all the requests by month, skipping 0th index
+print("\n........................")
 print("\nRequests By Month of the year")
+print("\n........................")
 for i,x in enumerate(MONTHNAMES):
 	if i == 0:
 		continue
@@ -114,7 +118,9 @@ for x in dates.keys():
 
 
 #loops through the dates and adds up all the similar weekly requests
+print("\n........................")
 print("\n Requests by week of year")
+print("\n........................")
 for i,x in enumerate(weeks):
 	print(i+1,":", weeks[i])
 
