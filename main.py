@@ -1,3 +1,4 @@
+import operator
 from urllib.request import urlretrieve
 
 URL_PATH = 'https://s3.amazonaws.com/tcmg476/http_access_log'
@@ -5,13 +6,11 @@ LOCAL_FILE = 'read.txt'
 
 local_file, headers = urlretrieve(URL_PATH, LOCAL_FILE, lambda x,y,z:
 print('.', end=", flush=True))
-      
-import operator
 
-#opens the file
-file = open("read.txt")
+#dictionary of request and number of times requested
+request = {}
 
-requests = {}
+#intializes all the variables
 totalRequests = 0
 successRequests = 0
 errorRequests = 0
