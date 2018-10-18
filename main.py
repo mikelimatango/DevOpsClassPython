@@ -1,23 +1,32 @@
+import operator
 from urllib.request import urlretrieve
+from datetime import datetime
+from dateutil import parser
+import ssl
+
+#Makes sure ssl requests can be made
+ssl._create_default_https_context = ssl._create_unverified_context
 
 URL_PATH = 'https://s3.amazonaws.com/tcmg476/http_access_log'
 LOCAL_FILE = 'read.txt'
 
+#retrieves URL and saves it to local file
 local_file, headers = urlretrieve(URL_PATH, LOCAL_FILE, lambda x,y,z:
 print('.', end=", flush=True))
       
-import operator
 
-#opens the file
-file = open("read.txt")
-
+#dictionary of requests and number of times requested
 requests = {}
+#dictionary of dates
+dates = {}
+
+#initializes all the variables
 totalRequests = 0
 successRequests = 0
 errorRequests = 0
 redirectedRequests = 0
 
-#initialize array of 12 month to store requests of each month
+#initializes array of 12 month to store requests of each month
 months = [[] for x in range(12)]
 
 #loops through each line of file
