@@ -1,4 +1,11 @@
+from urllib.request import urlretrieve
 
+URL_PATH = 'https://s3.amazonaws.com/tcmg476/http_access_log'
+LOCAL_FILE = 'read.txt'
+
+local_file, headers = urlretrieve(URL_PATH, LOCAL_FILE, lambda x,y,z:
+print('.', end=", flush=True))
+      
 import operator
 
 file = open("read.txt")
