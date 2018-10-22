@@ -10,9 +10,11 @@ ssl._create_default_https_context = ssl._create_unverified_context
 URL_PATH = 'https://s3.amazonaws.com/tcmg476/http_access_log'
 LOCAL_FILE = 'read.txt'
 
-#retrieves URL and saves it to local file
-local_file, headers = urlretrieve(URL_PATH, LOCAL_FILE, lambda x,y,z:
-print('.', end='', flush=True))   
+if os.path.isfile(LOCAL_FILE):
+	pass
+else:
+	local_file, headers = urlretrieve(URL_PATH, LOCAL_FILE, lambda x,y,z:
+	print('.', end='', flush=True)) 
 
 #dictionary of requests and number of times requested
 requests = {}
